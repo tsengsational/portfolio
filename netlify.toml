@@ -2,10 +2,6 @@
   command = "npm run generate"
   publish = "dist"
 
-[build.environment]
-  AUTH0_DOMAIN = "dev-ezqlg3y0x1tkqeag.us.auth0.com"
-  AUTH0_CLIENT_ID = "zXYp9T47OogpHufitTYHapgockZiDO5D"
-
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
