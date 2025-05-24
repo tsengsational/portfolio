@@ -4,9 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdn.auth0.com/js/auth0/9.22.0/auth0.min.js"></script>
 </head>
 <body>
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script>
+    // Initialize Auth0
+    const auth0 = new Auth0Client({
+      domain: 'your-auth0-domain.auth0.com',
+      client_id: 'your-auth0-client-id',
+      redirect_uri: window.location.origin + '/admin/'
+    });
+
+    // Handle authentication
+    window.addEventListener('load', async () => {
+      if (!await auth0.isAuthenticated()) {
+        await auth0.loginWithRedirect();
+      }
+    });
+  </script>
 </body>
 </html> 
