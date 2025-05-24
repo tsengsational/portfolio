@@ -1,0 +1,48 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "software"
+    label: "Software Projects"
+    folder: "content/software"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "thumbnail", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Tech Stack", name: "tech", widget: "list" }
+      - { label: "GitHub Link", name: "github", widget: "string", required: false }
+      - { label: "Live Demo", name: "demo", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "art"
+    label: "Art Projects"
+    folder: "content/art"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "select", options: ["Playwriting", "Visual Art", "Performance"] }
+      - { label: "Featured Image", name: "thumbnail", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "External Link", name: "link", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "content/about.md"
+        label: "About Page"
+        name: "about"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Profile Image", name: "image", widget: "image" }
+          - { label: "Developer Bio", name: "developer_bio", widget: "markdown" }
+          - { label: "Artist Bio", name: "artist_bio", widget: "markdown" } 

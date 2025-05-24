@@ -1,0 +1,91 @@
+// Reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+// Container
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+}
+
+// Grid system
+.grid {
+  display: grid;
+  gap: $spacing-medium;
+  
+  &--2-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  &--3-cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: $spacing-medium;
+  line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: $spacing-medium;
+}
+
+// Links
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+// Buttons
+.btn {
+  display: inline-block;
+  padding: $spacing-small $spacing-medium;
+  border: none;
+  border-radius: 4px;
+  background-color: $primary-color;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+  
+  &--secondary {
+    background-color: $secondary-color;
+    
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+} 
