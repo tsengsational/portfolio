@@ -1,7 +1,7 @@
 ---
 title: Modern E-commerce Platform
 date: 2024-03-15
-thumbnail: /uploads/ecommerce-platform.jpg
+thumbnail: https://images.squarespace-cdn.com/content/v1/574549d97da24fdfe9e2eba2/1531925919281-YTY060RIOZRMWTNR7TF4/applaudable_preview.gif?format=1000w
 description: A full-featured e-commerce platform built with Vue.js and Node.js,
   featuring real-time inventory management and personalized shopping
   experiences.
