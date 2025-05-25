@@ -8,7 +8,12 @@
       <div class="software__grid">
         <div v-for="project in projects" :key="project._path" class="software__card">
           <NuxtLink :to="project._path" class="software__card-link">
-            <img :src="project.thumbnail" :alt="project.title" class="software__card-image" />
+            <div v-if="project.thumbnail" class="software__card-image-container">
+              <img :src="project.thumbnail" :alt="project.title" class="software__card-image" />
+            </div>
+            <div v-else class="software__card-image-placeholder">
+              <span class="software__card-image-text">{{ project.title }}</span>
+            </div>
             <div class="software__card-content">
               <h2 class="software__card-title">{{ project.title }}</h2>
               <p class="software__card-description">{{ project.description }}</p>
@@ -87,10 +92,33 @@ useHead({
     color: inherit;
   }
 
-  &__card-image {
+  &__card-image-container {
     width: 100%;
     height: 300px;
+    overflow: hidden;
+  }
+
+  &__card-image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+  }
+
+  &__card-image-placeholder {
+    width: 100%;
+    height: 300px;
+    background-color: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: $spacing-medium;
+  }
+
+  &__card-image-text {
+    font-weight: bold;
   }
 
   &__card-content {

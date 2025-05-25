@@ -5,18 +5,27 @@
         <h1 class="art__title">{{ section.title }}</h1>
         <p class="art__description">{{ section.description }}</p>
       </div>
-      <div class="art__grid">
-        <div v-for="project in projects" :key="project._path" class="art__card">
-          <NuxtLink :to="project._path" class="art__card-link">
-            <img :src="project.thumbnail" :alt="project.title" class="art__card-image" />
-            <div class="art__card-content">
-              <h2 class="art__card-title">{{ project.title }}</h2>
-              <p class="art__card-description">{{ project.description }}</p>
-              <div class="art__card-tags">
-                <span v-for="tag in project.tags" :key="tag" class="art__card-tag">{{ tag }}</span>
+      
+      <div v-for="(projects, category) in groupedProjects" :key="category" class="art__category">
+        <h2 class="art__category-title">{{ category }}</h2>
+        <div class="art__grid">
+          <div v-for="project in projects" :key="project._path" class="art__card">
+            <NuxtLink :to="project._path" class="art__card-link">
+              <div v-if="project.thumbnail" class="art__card-image-container">
+                <img :src="project.thumbnail" :alt="project.title" class="art__card-image" />
               </div>
-            </div>
-          </NuxtLink>
+              <div v-else class="art__card-image-placeholder">
+                <span class="art__card-image-text">{{ project.title }}</span>
+              </div>
+              <div class="art__card-content">
+                <h3 class="art__card-title">{{ project.title }}</h3>
+                <p class="art__card-description">{{ project.description }}</p>
+                <div class="art__card-tags">
+                  <span v-for="tag in project.tags" :key="tag" class="art__card-tag">{{ tag }}</span>
+                </div>
+              </div>
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -36,6 +45,18 @@ const section = computed(() => {
 
 const projects = computed(() => {
   return content.value?.slice(1) || []
+})
+
+const groupedProjects = computed(() => {
+  const groups = {}
+  projects.value.forEach(project => {
+    const category = project.category || 'Other'
+    if (!groups[category]) {
+      groups[category] = []
+    }
+    groups[category].push(project)
+  })
+  return groups
 })
 
 useHead({
@@ -64,6 +85,17 @@ useHead({
     margin: 0 auto;
   }
 
+  &__category {
+    margin-bottom: $spacing-xlarge;
+  }
+
+  &__category-title {
+    margin-bottom: $spacing-large;
+    padding-bottom: $spacing-small;
+    border-bottom: 2px solid $primary-color;
+    color: $primary-color;
+  }
+
   &__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -87,10 +119,33 @@ useHead({
     color: inherit;
   }
 
-  &__card-image {
+  &__card-image-container {
     width: 100%;
     height: 300px;
+    overflow: hidden;
+  }
+
+  &__card-image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+  }
+
+  &__card-image-placeholder {
+    width: 100%;
+    height: 300px;
+    background-color: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: $spacing-medium;
+  }
+
+  &__card-image-text {
+    font-weight: bold;
   }
 
   &__card-content {
