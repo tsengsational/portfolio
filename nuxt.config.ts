@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/content'],
+  css: ['~/assets/scss/main.scss'],
   content: {
     documentDriven: true,
     markdown: {
@@ -47,7 +48,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/styles/_variables.scss" as *;'
+          additionalData: '@use "~/assets/scss/_variables.scss" as *;'
         }
       }
     }

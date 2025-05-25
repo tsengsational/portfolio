@@ -1,44 +1,26 @@
 <template>
   <div class="home">
-    <section class="hero">
-      <div class="container">
-        <h1>Welcome to My Portfolio</h1>
-        <p class="subtitle">Software Engineer & Artist</p>
+    <section class="home__hero">
+      <div class="home__hero-overlay"></div>
+      <div class="home__hero-content container">
+        <h1 class="home__title">Jason Tseng</h1>
+        <p class="home__subtitle">Web Developer, Playwright, & Artist</p>
       </div>
     </section>
 
-    <section class="software-section">
+    <section class="home__featured">
       <div class="container">
-        <h2>Software Engineering</h2>
-        <div class="grid grid--2-cols">
-          <div v-for="project in softwareProjects" :key="project._path" class="project-card">
-            <NuxtLink :to="project._path">
-              <img :src="project.thumbnail" :alt="project.title" class="project-image" />
-              <h3>{{ project.title }}</h3>
-              <p>{{ project.description }}</p>
+        <h2 class="home__section-title">Featured Work</h2>
+        <div class="home__grid">
+          <div v-for="project in featuredProjects" :key="project.slug" class="home__card">
+            <NuxtLink :to="`/${project.type}/${project.slug}`" class="home__card-link">
+              <img :src="project.thumbnail" :alt="project.title" class="home__card-image" />
+              <div class="home__card-content">
+                <h3 class="home__card-title">{{ project.title }}</h3>
+                <p class="home__card-description">{{ project.description }}</p>
+              </div>
             </NuxtLink>
           </div>
-        </div>
-        <div class="section-footer">
-          <NuxtLink to="/software" class="btn">View All Software Projects</NuxtLink>
-        </div>
-      </div>
-    </section>
-
-    <section class="art-section">
-      <div class="container">
-        <h2>Artistic Work</h2>
-        <div class="grid grid--2-cols">
-          <div v-for="project in artProjects" :key="project._path" class="project-card">
-            <NuxtLink :to="project._path">
-              <img :src="project.thumbnail" :alt="project.title" class="project-image" />
-              <h3>{{ project.title }}</h3>
-              <p>{{ project.description }}</p>
-            </NuxtLink>
-          </div>
-        </div>
-        <div class="section-footer">
-          <NuxtLink to="/art" class="btn">View All Art Projects</NuxtLink>
         </div>
       </div>
     </section>
@@ -46,52 +28,88 @@
 </template>
 
 <script setup>
-const { data: softwareProjects } = await useAsyncData('software', () => 
-  queryContent('/software')
-    .sort({ date: -1 })
-    .limit(4)
-    .find()
-)
-
-const { data: artProjects } = await useAsyncData('art', () => 
-  queryContent('/art')
-    .sort({ date: -1 })
-    .limit(4)
-    .find()
-)
+const { data: projects } = await useFetch('/api/projects')
+const featuredProjects = computed(() => {
+  return projects.value?.filter(project => project.featured) || []
+})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .home {
-  .hero {
-    text-align: center;
-    padding: $spacing-xlarge 0;
-    background-color: $primary-color;
+  &__hero {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: url('/media/images/clouds.jpg') center center / cover no-repeat fixed;
     color: white;
+
+    // Parallax effect for desktop
+    background-attachment: fixed;
+
+    // For mobile, fallback to scroll (fixed is not supported on iOS)
+    @media (max-width: 1024px) {
+      background-attachment: scroll;
+    }
+  }
+
+  &__hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+  }
+
+  &__hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 4rem;
+    text-transform: uppercase;
+    margin-bottom: $spacing-medium;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+
+    
+  }
+
+  &__subtitle {
+    font-size: 1.5rem;
+    opacity: 0.95;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  &__featured {
+    padding: $spacing-xxlarge 0;
+  }
+
+  &__section-title {
+    text-align: center;
     margin-bottom: $spacing-xlarge;
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: $spacing-medium;
-    }
-
-    .subtitle {
-      font-size: 1.5rem;
-      opacity: 0.9;
-    }
   }
 
-  .software-section,
-  .art-section {
-    padding: $spacing-xlarge 0;
-
-    h2 {
-      text-align: center;
-      margin-bottom: $spacing-large;
-    }
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-large;
   }
 
-  .project-card {
+  &__card {
     background: white;
     border-radius: 8px;
     overflow: hidden;
@@ -101,33 +119,31 @@ const { data: artProjects } = await useAsyncData('art', () =>
     &:hover {
       transform: translateY(-4px);
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .project-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    h3 {
-      padding: $spacing-medium;
-      margin: 0;
-    }
-
-    p {
-      padding: 0 $spacing-medium $spacing-medium;
-      margin: 0;
-      color: rgba($text-color, 0.8);
-    }
   }
 
-  .section-footer {
-    text-align: center;
-    margin-top: $spacing-large;
+  &__card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  &__card-content {
+    padding: $spacing-medium;
+  }
+
+  &__card-title {
+    margin: 0 0 $spacing-small;
+    font-size: 1.25rem;
+  }
+
+  &__card-description {
+    margin: 0;
+    color: $text-secondary;
   }
 }
 </style> 

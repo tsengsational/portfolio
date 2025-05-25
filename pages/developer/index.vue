@@ -1,16 +1,16 @@
 <template>
-  <div class="art">
+  <div class="software">
     <div class="container">
-      <h1 class="art__title">Art Projects</h1>
-      <div class="art__grid">
-        <div v-for="project in projects" :key="project._path" class="art__card">
-          <NuxtLink :to="project._path" class="art__card-link">
-            <img :src="project.thumbnail" :alt="project.title" class="art__card-image" />
-            <div class="art__card-content">
-              <h2 class="art__card-title">{{ project.title }}</h2>
-              <p class="art__card-description">{{ project.description }}</p>
-              <div class="art__card-tags">
-                <span v-for="tag in project.tags" :key="tag" class="art__card-tag">{{ tag }}</span>
+      <h1 class="software__title">Software Projects</h1>
+      <div class="software__grid">
+        <div v-for="project in projects" :key="project._path" class="software__card">
+          <NuxtLink :to="project._path" class="software__card-link">
+            <img :src="project.thumbnail" :alt="project.title" class="software__card-image" />
+            <div class="software__card-content">
+              <h2 class="software__card-title">{{ project.title }}</h2>
+              <p class="software__card-description">{{ project.description }}</p>
+              <div class="software__card-tags">
+                <span v-for="tag in project.tags" :key="tag" class="software__card-tag">{{ tag }}</span>
               </div>
             </div>
           </NuxtLink>
@@ -21,22 +21,22 @@
 </template>
 
 <script setup>
-const { data: projects } = await useAsyncData('art', () => 
-  queryContent('/art')
+const { data: projects } = await useAsyncData('software', () => 
+  queryContent('/software')
     .sort({ date: -1 })
     .find()
 )
 
 useHead({
-  title: 'Artistic Work',
+  title: 'Software Projects',
   meta: [
-    { name: 'description', content: 'Explore my artistic work, including playwriting and other creative projects.' }
+    { name: 'description', content: 'Browse my software engineering projects and technical work.' }
   ]
 })
 </script>
 
 <style lang="scss" scoped>
-.art {
+.software {
   &__title {
     text-align: center;
     margin-bottom: $spacing-xlarge;
@@ -67,7 +67,7 @@ useHead({
 
   &__card-image {
     width: 100%;
-    height: 300px;
+    height: 200px;
     object-fit: cover;
   }
 

@@ -1,66 +1,64 @@
 <template>
-  <div class="contact-page">
+  <div class="contact">
     <div class="container">
-      <h1>Contact Me</h1>
-      
-      <div class="contact-content">
-        <div class="contact-info">
-          <h2>Get in Touch</h2>
-          <p>Feel free to reach out to me for collaborations, opportunities, or just to say hello!</p>
-          
-          <div class="contact-methods">
-            <div class="contact-method">
-              <h3>Email</h3>
-              <a href="mailto:your.email@example.com">your.email@example.com</a>
-            </div>
-            
-            <div class="contact-method">
-              <h3>GitHub</h3>
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a>
-            </div>
-            
-            <div class="contact-method">
-              <h3>LinkedIn</h3>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">linkedin.com/in/yourusername</a>
-            </div>
+      <h1 class="contact__title">Contact Me</h1>
+      <div class="contact__content">
+        <div class="contact__info">
+          <h2 class="contact__info-title">Get in Touch</h2>
+          <p class="contact__info-text">
+            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+          </p>
+          <div class="contact__info-links">
+            <a href="mailto:your.email@example.com" class="contact__info-link">
+              <span class="contact__info-icon">📧</span>
+              your.email@example.com
+            </a>
+            <a href="https://github.com/yourusername" class="contact__info-link">
+              <span class="contact__info-icon">💻</span>
+              github.com/yourusername
+            </a>
+            <a href="https://linkedin.com/in/yourusername" class="contact__info-link">
+              <span class="contact__info-icon">🔗</span>
+              linkedin.com/in/yourusername
+            </a>
           </div>
         </div>
 
-        <form class="contact-form" @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label for="name">Name</label>
+        <form class="contact__form" @submit.prevent="handleSubmit">
+          <div class="contact__form-group">
+            <label for="name" class="contact__form-label">Name</label>
             <input
               id="name"
               v-model="form.name"
               type="text"
+              class="contact__form-input"
               required
-              placeholder="Your name"
             />
           </div>
 
-          <div class="form-group">
-            <label for="email">Email</label>
+          <div class="contact__form-group">
+            <label for="email" class="contact__form-label">Email</label>
             <input
               id="email"
               v-model="form.email"
               type="email"
+              class="contact__form-input"
               required
-              placeholder="your.email@example.com"
             />
           </div>
 
-          <div class="form-group">
-            <label for="message">Message</label>
+          <div class="contact__form-group">
+            <label for="message" class="contact__form-label">Message</label>
             <textarea
               id="message"
               v-model="form.message"
-              required
-              placeholder="Your message"
+              class="contact__form-textarea"
               rows="5"
+              required
             ></textarea>
           </div>
 
-          <button type="submit" class="btn">Send Message</button>
+          <button type="submit" class="contact__form-submit">Send Message</button>
         </form>
       </div>
     </div>
@@ -74,10 +72,10 @@ const form = ref({
   message: ''
 })
 
-const handleSubmit = () => {
-  // This is a placeholder for form submission
-  // In a real application, you would handle the form submission here
-  alert('Thank you for your message! This is a demo form.')
+const handleSubmit = async () => {
+  // Handle form submission
+  console.log('Form submitted:', form.value)
+  // Reset form
   form.value = {
     name: '',
     email: '',
@@ -93,14 +91,16 @@ useHead({
 })
 </script>
 
-<style lang="scss">
-.contact-page {
-  h1 {
+<style lang="scss" scoped>
+.contact {
+  &__title {
     text-align: center;
     margin-bottom: $spacing-xlarge;
   }
 
-  .contact-content {
+  &__content {
+    max-width: 800px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $spacing-xlarge;
@@ -110,72 +110,87 @@ useHead({
     }
   }
 
-  .contact-info {
-    h2 {
+  &__info {
+    &-title {
       margin-bottom: $spacing-medium;
+      color: $primary-color;
     }
 
-    p {
+    &-text {
       margin-bottom: $spacing-large;
-      color: rgba($text-color, 0.8);
+      line-height: 1.6;
+      color: $text-secondary;
     }
-  }
 
-  .contact-methods {
-    display: grid;
-    gap: $spacing-large;
+    &-links {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-medium;
+    }
 
-    .contact-method {
-      h3 {
-        margin-bottom: $spacing-small;
+    &-link {
+      display: flex;
+      align-items: center;
+      gap: $spacing-small;
+      color: $text-color;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
         color: $primary-color;
       }
+    }
 
-      a {
-        color: $secondary-color;
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+    &-icon {
+      font-size: 1.25rem;
     }
   }
 
-  .contact-form {
-    background: white;
-    padding: $spacing-large;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    .form-group {
+  &__form {
+    &-group {
       margin-bottom: $spacing-medium;
+    }
 
-      label {
-        display: block;
-        margin-bottom: $spacing-small;
-        color: $text-color;
-      }
+    &-label {
+      display: block;
+      margin-bottom: $spacing-small;
+      color: $text-color;
+    }
 
-      input,
-      textarea {
-        width: 100%;
-        padding: $spacing-small;
-        border: 1px solid rgba($text-color, 0.2);
-        border-radius: 4px;
-        font-family: inherit;
-        font-size: 1rem;
+    &-input,
+    &-textarea {
+      width: 100%;
+      padding: $spacing-small;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
 
-        &:focus {
-          outline: none;
-          border-color: $secondary-color;
-        }
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
       }
     }
 
-    button {
+    &-textarea {
+      resize: vertical;
+    }
+
+    &-submit {
+      display: block;
       width: 100%;
-      margin-top: $spacing-medium;
+      padding: $spacing-medium;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
     }
   }
 }

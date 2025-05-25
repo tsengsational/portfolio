@@ -1,24 +1,24 @@
 <template>
   <div class="layout">
-    <header class="header">
+    <header class="layout__header">
       <nav class="nav container">
-        <NuxtLink to="/" class="logo">Portfolio</NuxtLink>
-        <div class="nav-links">
-          <NuxtLink to="/software" class="nav-link">Software</NuxtLink>
-          <NuxtLink to="/art" class="nav-link">Art</NuxtLink>
-          <NuxtLink to="/about" class="nav-link">About</NuxtLink>
-          <NuxtLink to="/contact" class="nav-link">Contact</NuxtLink>
+        <NuxtLink to="/" class="nav__logo">Portfolio</NuxtLink>
+        <div class="nav__links">
+          <NuxtLink to="/developer" class="nav__link">Developer</NuxtLink>
+          <NuxtLink to="/art" class="nav__link">Art</NuxtLink>
+          <NuxtLink to="/about" class="nav__link">About</NuxtLink>
+          <NuxtLink to="/contact" class="nav__link">Contact</NuxtLink>
         </div>
       </nav>
     </header>
 
-    <main class="main">
+    <main class="layout__main">
       <slot />
     </main>
 
-    <footer class="footer">
+    <footer class="layout__footer">
       <div class="container">
-        <p>&copy; {{ new Date().getFullYear() }} Your Name. All rights reserved.</p>
+        <p class="layout__copyright">&copy; {{ new Date().getFullYear() }} Your Name. All rights reserved.</p>
       </div>
     </footer>
   </div>
@@ -44,55 +44,58 @@ onMounted(() => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
 
-.header {
-  background-color: $primary-color;
-  padding: $spacing-medium 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  &__header {
+    background-color: $primary-color;
+    padding: $spacing-medium 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  &__main {
+    flex: 1;
+  }
+
+  &__footer {
+    background-color: $primary-color;
+    color: white;
+    padding: $spacing-medium 0;
+    margin-top: auto;
+  }
+
+  &__copyright {
+    margin: 0;
+  }
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-.logo {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.nav-links {
-  display: flex;
-  gap: $spacing-medium;
-}
-
-.nav-link {
-  color: white;
-  text-decoration: none;
-  padding: $spacing-small;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: rgba(white, 0.1);
+  &__logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
   }
-}
 
-.main {
-  flex: 1;
-  padding: $spacing-large 0;
-}
+  &__links {
+    display: flex;
+    gap: $spacing-medium;
+  }
 
-.footer {
-  background-color: $primary-color;
-  color: white;
-  padding: $spacing-medium 0;
-  margin-top: auto;
+  &__link {
+    color: white;
+    text-decoration: none;
+    padding: $spacing-small;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(white, 0.1);
+    }
+  }
 }
 </style> 

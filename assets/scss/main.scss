@@ -1,0 +1,105 @@
+@use 'variables' as *;
+@use 'layout' as *;
+
+// Reset and base styles
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: $font-sans;
+  line-height: 1.5;
+  color: $text-color;
+  background-color: #f9fafb;
+}
+
+// Container
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin-bottom: $spacing-medium;
+}
+
+p {
+  margin-bottom: $spacing-medium;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color $transition-normal ease;
+
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Lists
+ul, ol {
+  list-style-position: inside;
+  margin-bottom: $spacing-medium;
+}
+
+// Forms
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+// Buttons
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+// Utility classes
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secondary {
+  color: $text-secondary;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.rounded {
+  border-radius: $border-radius-md;
+}
+
+.shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Responsive utilities
+@media (max-width: $breakpoint-md) {
+  html {
+    font-size: 14px;
+  }
+} 
