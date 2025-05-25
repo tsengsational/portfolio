@@ -4,7 +4,6 @@
       <div class="project__header">
         <h1 class="project__title">{{ project.title }}</h1>
         <div class="project__meta">
-          <span class="project__date">{{ formatDate(project.date) }}</span>
           <div class="project__tags" v-if="project.tags">
             <span v-for="tag in project.tags" :key="tag" class="project__tag">{{ tag }}</span>
           </div>
