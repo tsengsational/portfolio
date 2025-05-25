@@ -13,7 +13,7 @@
               <h2 class="software__card-title">{{ project.title }}</h2>
               <p class="software__card-description">{{ project.description }}</p>
               <div class="software__card-tags">
-                <span v-for="tag in project.tags" :key="tag" class="software__card-tag">{{ tag }}</span>
+                <span v-for="tech in project.tech" :key="tech" class="software__card-tag">{{ tech }}</span>
               </div>
             </div>
           </NuxtLink>
@@ -48,9 +48,20 @@ useHead({
 
 <style lang="scss" scoped>
 .software {
-  &__title {
+  &__header {
     text-align: center;
     margin-bottom: $spacing-xlarge;
+  }
+
+  &__title {
+    margin-bottom: $spacing-medium;
+  }
+
+  &__description {
+    font-size: 1.1rem;
+    color: $text-secondary;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   &__grid {
@@ -78,7 +89,7 @@ useHead({
 
   &__card-image {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
   }
 

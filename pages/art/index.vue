@@ -1,7 +1,10 @@
 <template>
   <div class="art">
     <div class="container">
-      <h1 class="art__title">Art Projects</h1>
+      <div class="art__header">
+        <h1 class="art__title">{{ section.title }}</h1>
+        <p class="art__description">{{ section.description }}</p>
+      </div>
       <div class="art__grid">
         <div v-for="project in projects" :key="project._path" class="art__card">
           <NuxtLink :to="project._path" class="art__card-link">
@@ -21,11 +24,19 @@
 </template>
 
 <script setup>
-const { data: projects } = await useAsyncData('art', () => 
+const { data: content } = await useAsyncData('art', () => 
   queryContent('/art')
     .sort({ date: -1 })
     .find()
 )
+
+const section = computed(() => {
+  return content.value?.[0] || { title: 'Art Projects', description: '' }
+})
+
+const projects = computed(() => {
+  return content.value?.slice(1) || []
+})
 
 useHead({
   title: 'Artistic Work',
@@ -37,9 +48,20 @@ useHead({
 
 <style lang="scss" scoped>
 .art {
-  &__title {
+  &__header {
     text-align: center;
     margin-bottom: $spacing-xlarge;
+  }
+
+  &__title {
+    margin-bottom: $spacing-medium;
+  }
+
+  &__description {
+    font-size: 1.1rem;
+    color: $text-secondary;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   &__grid {

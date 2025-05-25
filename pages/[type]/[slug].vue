@@ -1,11 +1,11 @@
 <template>
-  <div class="project">
+  <div class="project" v-if="project">
     <div class="container">
       <div class="project__header">
         <h1 class="project__title">{{ project.title }}</h1>
         <div class="project__meta">
           <span class="project__date">{{ formatDate(project.date) }}</span>
-          <div class="project__tags">
+          <div class="project__tags" v-if="project.tags">
             <span v-for="tag in project.tags" :key="tag" class="project__tag">{{ tag }}</span>
           </div>
         </div>
@@ -22,22 +22,44 @@
       </div>
 
       <div class="project__content">
-        <Content :document="project" />
+        <ContentDoc :document="project" />
       </div>
 
-      <div class="project__links" v-if="project.links">
+      <div class="project__links" v-if="project.link || project.links">
         <a
-          v-for="(link, label) in project.links"
-          :key="label"
-          :href="link"
+          v-if="project.link"
+          :href="project.link"
           target="_blank"
           rel="noopener"
           class="project__link"
         >
-          {{ label }}
+          {{ project.link_text || 'View Project' }}
         </a>
+        <template v-if="project.links">
+          <a
+            v-if="project.github"
+            :href="project.github"
+            target="_blank"
+            rel="noopener"
+            class="project__link"
+          >
+            {{ project.github_text || 'View on GitHub' }}
+          </a>
+          <a
+            v-if="project.demo"
+            :href="project.demo"
+            target="_blank"
+            rel="noopener"
+            class="project__link"
+          >
+            {{ project.demo_text || 'Live Demo' }}
+          </a>
+        </template>
       </div>
     </div>
+  </div>
+  <div v-else class="container">
+    <p>Project not found</p>
   </div>
 </template>
 
@@ -47,11 +69,12 @@ const { type, slug } = route.params
 
 const { data: project } = await useAsyncData(`project-${type}-${slug}`, () =>
   queryContent(`/${type}`)
-    .where({ slug })
+    .where({ _path: { $contains: slug } })
     .findOne()
 )
 
 const formatDate = (date) => {
+  if (!date) return ''
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',

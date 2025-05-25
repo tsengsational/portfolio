@@ -12,8 +12,8 @@
       <div class="container">
         <h2 class="home__section-title">Featured Work</h2>
         <div class="home__grid">
-          <div v-for="project in featuredProjects" :key="project.slug" class="home__card">
-            <NuxtLink :to="`/${project.type}/${project.slug}`" class="home__card-link">
+          <div v-for="project in featuredProjects" :key="project._path" class="home__card">
+            <NuxtLink :to="project._path" class="home__card-link">
               <img :src="project.thumbnail" :alt="project.title" class="home__card-image" />
               <div class="home__card-content">
                 <h3 class="home__card-title">{{ project.title }}</h3>
@@ -28,9 +28,16 @@
 </template>
 
 <script setup>
-const { data: projects } = await useFetch('/api/projects')
+const { data: projects } = await useAsyncData('projects', () =>
+  queryContent()
+    .where({ _path: { $ne: '/art/index' } })
+    .where({ _path: { $ne: '/software/index' } })
+    .sort({ date: -1 })
+    .find()
+)
+
 const featuredProjects = computed(() => {
-  return projects.value?.filter(project => project.featured) || []
+  return projects.value || []
 })
 </script>
 
