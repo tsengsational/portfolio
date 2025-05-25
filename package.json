@@ -19,5 +19,10 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/image": "^1.10.0"
+  },
+  "imports": {
+    "#internal/*": {
+      "import": "#internal/*"
+    }
   }
 }

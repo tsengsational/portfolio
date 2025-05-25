@@ -21,6 +21,7 @@ collections:
       - { label: "GitHub Link Text", name: "github_text", widget: "string", required: false, hint: "Text to display on the GitHub link button" }
       - { label: "Live Demo", name: "demo", widget: "string", required: false }
       - { label: "Demo Link Text", name: "demo_text", widget: "string", required: false, hint: "Text to display on the demo link button" }
+      - { label: "Gallery", name: "gallery", widget: "list", required: false, hint: "Add multiple images to display in a gallery", fields: [{ label: "Image", name: "image", widget: "image" }] }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "art"
@@ -36,6 +37,7 @@ collections:
       - { label: "Description", name: "description", widget: "text" }
       - { label: "External Link", name: "link", widget: "string", required: false }
       - { label: "Link Text", name: "link_text", widget: "string", required: false, hint: "Text to display on the external link button" }
+      - { label: "Gallery", name: "gallery", widget: "list", required: false, hint: "Add multiple images to display in a gallery", fields: [{ label: "Image", name: "image", widget: "image" }] }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "pages"

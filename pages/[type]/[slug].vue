@@ -20,6 +20,7 @@
           class="project__gallery-image"
         />
       </div>
+      <h2>{{ project.description }}</h2>
 
       <div class="project__content">
         <ContentDoc :document="project" />
