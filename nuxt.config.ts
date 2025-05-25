@@ -37,7 +37,6 @@ export default defineNuxtConfig({
         '/software',
         '/art',
         '/software/2024-03-15-ecommerce-platform',
-        '/art/2024-03-15-digital-dreams'
       ],
       crawlLinks: true
     },

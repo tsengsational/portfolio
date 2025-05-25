@@ -4,7 +4,7 @@
       <nav class="nav container">
         <NuxtLink to="/" class="nav__logo">Portfolio</NuxtLink>
         <div class="nav__links">
-          <NuxtLink to="/developer" class="nav__link">Developer</NuxtLink>
+          <NuxtLink to="/software" class="nav__link">Developer</NuxtLink>
           <NuxtLink to="/art" class="nav__link">Art</NuxtLink>
           <NuxtLink to="/about" class="nav__link">About</NuxtLink>
           <NuxtLink to="/contact" class="nav__link">Contact</NuxtLink>
