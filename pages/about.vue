@@ -13,12 +13,12 @@
       <div class="bio-sections">
         <section class="bio-section">
           <h2>Software Engineer</h2>
-          <div class="content" v-html="$md.render(about.developer_bio)" />
+          <Content :document="about" field="developer_bio" />
         </section>
 
         <section class="bio-section">
           <h2>Artist</h2>
-          <div class="content" v-html="$md.render(about.artist_bio)" />
+          <Content :document="about" field="artist_bio" />
         </section>
       </div>
     </div>

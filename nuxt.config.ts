@@ -1,11 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  ssr: true,
-  modules: [
-    '@nuxt/content'
-  ],
+  modules: ['@nuxt/content'],
   content: {
     documentDriven: true,
     markdown: {
@@ -14,14 +10,8 @@ export default defineNuxtConfig({
         searchDepth: 3,
       },
     },
-  },
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@use "@/assets/styles/_variables.scss" as *;'
-        }
-      }
+    navigation: {
+      fields: ['title', 'description', 'image']
     }
   },
   app: {
@@ -39,7 +29,25 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/']
+      routes: [
+        '/',
+        '/about',
+        '/contact',
+        '/software',
+        '/art',
+        '/software/2024-03-15-ecommerce-platform',
+        '/art/2024-03-15-digital-dreams'
+      ]
+    }
+  },
+  ssr: true,
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/styles/_variables.scss" as *;'
+        }
+      }
     }
   }
 })
