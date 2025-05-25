@@ -26,7 +26,7 @@
 <script setup>
 const { data: content } = await useAsyncData('art', () => 
   queryContent('/art')
-    .sort({ date: -1 })
+    .sort({ order: 1, date: -1 })
     .find()
 )
 

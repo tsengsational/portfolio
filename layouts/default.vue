@@ -2,7 +2,7 @@
   <div class="layout">
     <header class="layout__header">
       <nav class="nav container">
-        <NuxtLink to="/" class="nav__logo">Portfolio</NuxtLink>
+        <NuxtLink to="/" class="nav__logo"><img class="nav__logo-image" src="/public/media/images/jft.gif" alt="Logo"></NuxtLink>
         <div class="nav__links">
           <NuxtLink to="/software" class="nav__link">Developer</NuxtLink>
           <NuxtLink to="/art" class="nav__link">Art</NuxtLink>
@@ -79,6 +79,13 @@ onMounted(() => {
     font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo-image {
+    width: 2.25rem;
+    height: 2.25rem;
   }
 
   &__links {

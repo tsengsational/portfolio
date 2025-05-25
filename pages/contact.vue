@@ -9,17 +9,13 @@
             I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
           </p>
           <div class="contact__info-links">
-            <a href="mailto:your.email@example.com" class="contact__info-link">
-              <span class="contact__info-icon">📧</span>
-              your.email@example.com
-            </a>
             <a href="https://github.com/yourusername" class="contact__info-link">
               <span class="contact__info-icon">💻</span>
-              github.com/yourusername
+              github.com/tsengsational
             </a>
             <a href="https://linkedin.com/in/yourusername" class="contact__info-link">
               <span class="contact__info-icon">🔗</span>
-              linkedin.com/in/yourusername
+              linkedin.com/in/jasonftseng
             </a>
           </div>
         </div>

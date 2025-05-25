@@ -13,6 +13,7 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", required: false, hint: "Lower numbers appear first. Leave empty to sort by date." }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "thumbnail", widget: "image" }
       - { label: "Description", name: "description", widget: "text" }
@@ -31,6 +32,7 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", required: false, hint: "Lower numbers appear first. Leave empty to sort by date." }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Category", name: "category", widget: "select", options: ["Playwriting", "Visual Art", "Performance", "Other"] }
       - { label: "Featured Image", name: "thumbnail", widget: "image" }

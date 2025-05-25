@@ -15,12 +15,12 @@
         <img
           v-for="(image, index) in project.gallery"
           :key="index"
-          :src="image"
+          :src="image.image"
           :alt="`${project.title} - Image ${index + 1}`"
           class="project__gallery-image"
         />
       </div>
-      <h2>{{ project.description }}</h2>
+      <h2 class="project__description" v-if="project.description">{{ project.description }}</h2>
 
       <div class="project__content">
         <ContentDoc :document="project" />
@@ -86,12 +86,22 @@ const formatDate = (date) => {
 
 <style lang="scss" scoped>
 .project {
+  .container {
+    padding: $spacing-large;
+  }
+
   &__header {
     margin-bottom: $spacing-xlarge;
   }
 
   &__title {
     margin-bottom: $spacing-medium;
+  }
+
+  &__description {
+    margin-bottom: $spacing-xlarge;
+    max-width: 800px;
+    margin: 0 auto 1rem;
   }
 
   &__meta {
@@ -128,7 +138,7 @@ const formatDate = (date) => {
 
   &__gallery-image {
     width: 100%;
-    height: 300px;
+    height: 500px;
     object-fit: cover;
     border-radius: 8px;
   }
