@@ -3,12 +3,9 @@ title: Fear & Wonder
 date: 2024-03-15
 category: Playwriting
 thumbnail: /uploads/f-w-trinity.png
-description: "Photo: Emily Farthing; Flux Theatre Ensemble/Judson Arts Workshop,
-  June 12, 2024; New York City"
+description: A Queer Teenage Romance | Heartstopper meets Hillsong
 link: https://newplayexchange.org/plays/442417/fear-and-wonder
 ---
-### A Queer Teenage Romance | Heartstopper meets Hillsong
-
 In a forbidden love story, Jabez and Ryan, two boys of color, navigate a Christian summer camp together in the early 2000s. Their friendship quickly grows into a budding romance that they try to keep alive after returning home. Challenged by their parents, the hazards of landline phones, and their faith, they are forced to secrecy. Finding solace in each other and their shared love of music, theology, and Harry Potter; the reality of living in between two worlds threaten to keep them apart as they navigate their blossoming queer identities and teenage angst in their conservative faith communities.
 
 2M, 1W
