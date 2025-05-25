@@ -1,6 +1,6 @@
 [build]
 command = "npm run generate"
-publish = "dist"
+publish = ".output/public"
 
 [build.environment]
 NODE_VERSION = "18"
@@ -16,7 +16,6 @@ status = 200
 from = "/*"
 to = "/index.html"
 status = 200
-force = true
 
 # Security headers
 [[headers]]
