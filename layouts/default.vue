@@ -24,6 +24,21 @@
   </div>
 </template>
 
+<script setup>
+// Add Netlify Identity widget script
+onMounted(() => {
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+});
+</script>
+
 <style lang="scss">
 .layout {
   min-height: 100vh;
